@@ -24,6 +24,7 @@ ClassLoader::addNamespaces(array
 ClassLoader::addClasses(array
 (
     // Library
-    'Crosstabs\CrossData'  => 'system/modules/crosstabs/library/Crosstabs/Data.php',
-    'Crosstabs\CrossTable' => 'system/modules/crosstabs/library/Crosstabs/Table.php',
+    'Crosstabs\CrossTable' => 'system/modules/crosstabs/library/Crosstabs/CrossTable.php',
+    'Crosstabs\Data'       => 'system/modules/crosstabs/library/Crosstabs/Data.php',
+    'Crosstabs\LeftTable'  => 'system/modules/crosstabs/library/Crosstabs/LeftTable.php',
 ));
