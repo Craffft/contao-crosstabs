@@ -29,11 +29,39 @@ class LeftTable extends \Controller
      *
      * @access public
      * @static
+     * @param  int $intPasteId
      * @param  \DataContainer $dc
      */
-    public static function copyCallback(\DataContainer $dc)
+    public static function copyCallback($intPasteId, \DataContainer $dc)
     {
-        // Todo
+        $intCopyId = $dc->id;
+
+        if (isset($GLOBALS['TL_DCA'][$dc->table]['fields'])) {
+            foreach ($GLOBALS['TL_DCA'][$dc->table]['fields'] as $k => $v) {
+                if (!isset($v['crossTable']) || !isset($v['crossCurrentKey'])) {
+                    continue;
+                }
+
+                // Get model name
+                $strModel = \Model::getClassFromTable($v['crossTable']);
+
+                // Check if model exists
+                if (!class_exists($strModel)) {
+                    return;
+                }
+
+                // Get model object
+                $objModel = $strModel::findBy($v['crossCurrentKey'], $intCopyId);
+
+                if ($objModel !== null) {
+                    while ($objModel->next()) {
+                        $objCopy = clone $objModel->current();
+                        $objCopy->$v['crossCurrentKey'] = $intPasteId;
+                        $objCopy->save();
+                    }
+                }
+            }
+        }
     }
 
     /**
