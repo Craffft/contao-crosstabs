@@ -189,6 +189,7 @@ $GLOBALS['TL_DCA']['tl_my_cross_table'] = array
         (
             // ...
 
+            // Add the left table field relation to the cross table
             'member' => array
             (
                 'label'                   => &$GLOBALS['TL_LANG']['tl_cross_table']['member'],
@@ -196,6 +197,8 @@ $GLOBALS['TL_DCA']['tl_my_cross_table'] = array
                 'sql'                     => "int(10) unsigned NOT NULL default '0'",
                 'relation'                => array('type'=>'hasOne', 'load'=>'lazy')
             ),
+
+            // Add the right table field relation to the cross table
             'mgroup' => array
             (
                 'label'                   => &$GLOBALS['TL_LANG']['tl_cross_table']['mgroup'],
