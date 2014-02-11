@@ -17,14 +17,14 @@ Usage in the config file
 // system/modules/mymodule/config/config.php
 
 // Define left table
-$GLOBALS['BE_MOD']['fwp_member']['member'] = array
+$GLOBALS['BE_MOD']['accounts']['member'] = array
 (
     // Add the cross table to the allowed tables
     'tables' => array('tl_member', 'tl_my_cross_table')
 );
 
 // Define right table
-$GLOBALS['BE_MOD']['fwp_member']['mgroup'] = array
+$GLOBALS['BE_MOD']['accounts']['mgroup'] = array
 (
     // Add the cross table to the allowed tables
     'tables' => array('tl_member_group', 'tl_my_cross_table')
@@ -42,7 +42,7 @@ $GLOBALS['TL_DCA']['tl_member']['config']['ondelete_callback'][] = array('\\Cros
 
 // ...
 
-// Adds an icon link to the records in the list
+// Adds a link icon to the cross table on each left table item
 $GLOBALS['TL_DCA']['tl_member']['list']['operations']['my_cross_table_button'] = array
 (
     'label'               => &$GLOBALS['TL_LANG']['tl_member']['my_cross_table_button'],
