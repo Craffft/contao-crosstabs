@@ -82,7 +82,7 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['groups'] = array
         array('\\Crosstabs\\Data', 'load')
     ),
     // Saves the data into the cross table and truncates the data in the current field
-    // The data will be only stored in the cross table and not this field
+    // The data will be only stored in the cross table and not in this field
     'save_callback'           => array
     (
         array('\\Crosstabs\\Data', 'save')
@@ -155,6 +155,7 @@ $GLOBALS['TL_DCA']['tl_my_cross_table'] = array
         (
             // ...
 
+            // Adds a left table edit icon to the records in the cross table list
             'edit_left_table_item' => array
             (
                 'label'               => &$GLOBALS['TL_LANG']['tl_cross_table']['edit_left_table_item'],
@@ -165,6 +166,8 @@ $GLOBALS['TL_DCA']['tl_my_cross_table'] = array
                         return \Crosstabs\CrossTable::icon($row['member'], $href, $label, $title, $icon);
                     }
             ),
+
+            // Adds a right table edit icon to the records in the cross table list
             'edit_right_table_item' => array
             (
                 'label'               => &$GLOBALS['TL_LANG']['tl_cross_table']['edit_right_table_item'],
