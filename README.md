@@ -131,6 +131,7 @@ $GLOBALS['TL_DCA']['tl_my_cross_table'] = array
 
         'global_operations' => array
         (
+            // Adds a button to go to the left table
             'left_table_list' => array
             (
                 'label'               => &$GLOBALS['TL_LANG']['tl_cross_table']['left_table_list'],
@@ -138,6 +139,8 @@ $GLOBALS['TL_DCA']['tl_my_cross_table'] = array
                 'class'               => 'header_left_table_list',
                 'attributes'          => 'onclick="Backend.getScrollOffset()" accesskey="e"'
             ),
+
+            // Adds a button to go to the right table
             'right_table_list' => array
             (
                 'label'               => &$GLOBALS['TL_LANG']['tl_cross_table']['right_table_list'],
