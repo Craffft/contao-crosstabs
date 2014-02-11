@@ -9,6 +9,11 @@ License
 This Contao extension is licensed under the terms of the LGPLv3.
 http://www.gnu.org/licenses/lgpl-3.0.html
 
+Links
+-----
+
+https://contao.org/en/extension-list/view/crosstabs.html
+
 Documentation
 -------------
 
