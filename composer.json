@@ -23,7 +23,7 @@
         "contao-community-alliance/composer-installer": "*"
     },
     "autoload": {
-        "classmap": ["src/"]
+        "classmap": ["system/"]
     },
     "replace": {
         "contao-legacy/crosstabs": "*"
@@ -31,7 +31,7 @@
     "extra": {
         "contao": {
             "sources": {
-                "src/system/modules/crosstabs": "system/modules/crosstabs"
+                "system/modules/crosstabs": "system/modules/crosstabs"
             }
         }
     }
