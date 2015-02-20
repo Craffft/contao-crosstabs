@@ -6,7 +6,7 @@
  * Copyright (c) 2014 Daniel Kiesel
  *
  * @package Crosstabs
- * @link    https://github.com/icodr8/contao-crosstabs
+ * @link    https://github.com/craffft/contao-crosstabs
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 

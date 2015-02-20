@@ -6,7 +6,7 @@
  * Copyright (c) 2014 Daniel Kiesel
  *
  * @package Crosstabs
- * @link    https://github.com/icodr8/contao-crosstabs
+ * @link    https://github.com/craffft/contao-crosstabs
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
@@ -19,7 +19,7 @@ namespace Crosstabs;
  * Class CrossTable
  *
  * @copyright  Daniel Kiesel 2014
- * @author     Daniel Kiesel <https://github.com/icodr8>
+ * @author     Daniel Kiesel <daniel@craffft.de>
  */
 class CrossTable extends \Controller
 {
