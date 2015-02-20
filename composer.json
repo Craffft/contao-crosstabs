@@ -1,21 +1,21 @@
 {
-    "name": "icodr8/contao-crosstabs",
+    "name": "craffft/contao-crosstabs",
     "description": "Crosstabs helper for Contao OpenSource CMS",
     "keywords": ["crosstabs", "crosstable", "cross", "database", "tables"],
     "type": "contao-module",
-    "homepage": "http://daniel-kiesel.de",
+    "homepage": "http://craffft.de",
     "license": "LGPL-3.0+",
     "authors": [
         {
             "name": "Daniel Kiesel",
-            "email": "icodr8@gmail.com",
-            "homepage": "http://daniel-kiesel.de",
+            "email": "daniel@craffft.de",
+            "homepage": "http://craffft.de",
             "role": "Developer"
         }
     ],
     "support": {
-        "issues": "https://github.com/iCodr8/contao-crosstabs/issues",
-        "source": "https://github.com/iCodr8/contao-crosstabs"
+        "issues": "https://github.com/Craffft/contao-crosstabs/issues",
+        "source": "https://github.com/Craffft/contao-crosstabs"
     },
     "require": {
         "php": ">=5.3.2",
