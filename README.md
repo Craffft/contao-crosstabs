@@ -15,9 +15,13 @@ Links
 https://contao.org/en/extension-list/view/crosstabs.html
 
 Documentation
--------------
+=============
+
+Usage for TabelLookupWizard
+---------------------------
 
 Usage in the config file
+
 ```php
 // system/modules/mymodule/config/config.php
 
@@ -37,6 +41,7 @@ $GLOBALS['BE_MOD']['accounts']['mgroup'] = array
 ```
 
 Usage in the left table
+
 ```php
 // system/modules/mymodule/dca/tl_member.php
 
@@ -84,15 +89,15 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['groups'] = array
     // Loads the data from the cross table
     'load_callback'           => array
     (
-        array('\\Crosstabs\\Data', 'load')
+        array('\\Crosstabs\\DataHandler\\TableLookupWizard', 'load')
     ),
     // Saves the data into the cross table and truncates the data in the current field
     // The data will be only stored in the cross table and not in this field
     'save_callback'           => array
     (
-        array('\\Crosstabs\\Data', 'save')
+        array('\\Crosstabs\\DataHandler\\TableLookupWizard', 'save')
     ),
-    'sql'                     => "blob NULL",
+    'sql'                     => "tinyint(1) unsigned NOT NULL default '0'",
     'relation'                => array('type'=>'belongsToMany', 'load'=>'lazy')
 );
 ```
@@ -217,3 +222,113 @@ $GLOBALS['TL_DCA']['tl_my_cross_table'] = array
     )
 );
 ```
+
+Usage for MultiColumnWizard
+---------------------------
+
+MultiColumnWizard field definition example:
+
+```php
+$GLOBALS['TL_DCA']['tl_member']['fields']['training_courses'] = array
+(
+    'label'                   => &$GLOBALS['TL_LANG']['tl_member']['training_courses'],
+    'exclude'                 => true,
+    'crossTable'              => 'tl_member_training_course',
+    'crossCurrentKey'         => 'member',
+    'crossForeignKey'         => 'training_course',
+    'inputType'               => 'multiColumnWizard',
+    'eval'                    => array
+    (
+        'columnFields' => array
+        (
+            'training_course' => array
+            (
+                // Field definition ...
+            ),
+            'dateOfCompletion' => array
+            (
+                // Field definition ...
+            ),
+            'location' => array
+            (
+                // Field definition ...
+            )
+        )
+    ),
+    'load_callback'           => array
+    (
+        array('\\Crosstabs\\DataHandler\\MultiColumnWizard', 'load')
+    ),
+    'save_callback'           => array
+    (
+        array('\\Crosstabs\\DataHandler\\MultiColumnWizard', 'save')
+    ),
+    'sql'                     => "tinyint(1) unsigned NOT NULL default '0'"
+);
+```
+
+Cross Table DCA definition example:
+
+```php
+<?php
+
+$GLOBALS['TL_DCA']['tl_member_training_course'] = array
+(
+    // Config
+    'config' => array
+    (
+        'dataContainer'               => 'Table',
+        'enableVersioning'            => false,
+        'onload_callback' => array
+        (
+            array('tl_member_training_course', 'checkPermission')
+        ),
+        'sql' => array
+        (
+            'keys' => array
+            (
+                'id'                        => 'primary',
+                'member'                    => 'index',
+                'training_course'           => 'index',
+                'member,training_course'    => 'unique'
+            )
+        )
+    ),
+
+    // Fields
+    'fields' => array
+    (
+        'id' => array
+        (
+            'sql'                     => "int(10) unsigned NOT NULL auto_increment"
+        ),
+        'sorting' => array
+        (
+            'sql'                     => "int(10) unsigned NOT NULL default '0'"
+        ),
+        'tstamp' => array
+        (
+            'sql'                     => "int(10) unsigned NOT NULL default '0'"
+        ),
+        'member' => array
+        (
+            'sql'                     => "int(10) unsigned NOT NULL default '0'"
+        ),
+        'training_course' => array
+        (
+            'sql'                     => "int(10) unsigned NOT NULL default '0'"
+        ),
+        'dateOfCompletion' => array
+        (
+            'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
+        'location' => array
+        (
+            'sql'                     => "varchar(255) NOT NULL default ''"
+        )
+    )
+);
+
+```
+
+Do not forget to define the model classes for your cross tables!
