@@ -76,6 +76,11 @@ class MultiColumnWizard extends \Controller
         if (count($arrItems) > 0) {
             $t = $strModel::getTable();
             $arrForeignKeys = array_column($arrItems, $strCrossForeignKey);
+
+            if (!is_array($arrForeignKeys) || count($arrForeignKeys) < 1) {
+                $arrForeignKeys = array(0);
+            }
+
             $objItem = $strModel::findBy(array("$t.$strCrossCurrentKey=? AND $t.$strCrossForeignKey NOT IN(" . implode(',', array_map('intval', $arrForeignKeys)) . ")"), array($intId));
         } else {
             $objItem = $strModel::findBy($strCrossCurrentKey, $intId);
