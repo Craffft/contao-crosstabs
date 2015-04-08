@@ -235,6 +235,7 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['training_courses'] = array
     'exclude'                 => true,
     'crossTable'              => 'tl_member_training_course',
     'crossCurrentKey'         => 'member',
+    // Remove the crossForeignKey field, if you have a 1:n (only to crossTable) and not a n:m connection
     'crossForeignKey'         => 'training_course',
     'inputType'               => 'multiColumnWizard',
     'eval'                    => array

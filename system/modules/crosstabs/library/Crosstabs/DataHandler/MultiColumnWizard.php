@@ -69,11 +69,11 @@ class MultiColumnWizard extends \Controller
      * @param array $arrItems
      * @param $intId
      * @param $strCrossCurrentKey
-     * @param $strCrossForeignKey
+     * @param null $strCrossForeignKey
      */
-    protected static function removeOldItems($strModel, array $arrItems, $intId, $strCrossCurrentKey, $strCrossForeignKey)
+    protected static function removeOldItems($strModel, array $arrItems, $intId, $strCrossCurrentKey, $strCrossForeignKey = null)
     {
-        if (count($arrItems) > 0) {
+        if (!empty($strCrossForeignKey) && count($arrItems) > 0) {
             $t = $strModel::getTable();
             $arrForeignKeys = array_column($arrItems, $strCrossForeignKey);
 
@@ -98,9 +98,9 @@ class MultiColumnWizard extends \Controller
      * @param array $arrItems
      * @param $intId
      * @param $strCrossCurrentKey
-     * @param $strCrossForeignKey
+     * @param null $strCrossForeignKey
      */
-    protected static function addNewItems($strModel, array $arrItems, $intId, $strCrossCurrentKey, $strCrossForeignKey)
+    protected static function addNewItems($strModel, array $arrItems, $intId, $strCrossCurrentKey, $strCrossForeignKey = null)
     {
         if (count($arrItems) > 0) {
             $t = $strModel::getTable();
@@ -110,15 +110,21 @@ class MultiColumnWizard extends \Controller
                     return;
                 }
 
-                $intFk = $arrData[$strCrossForeignKey];
+                $objItem = null;
 
-                $objItem = $strModel::findBy(array("$t.$strCrossCurrentKey=? AND $t.$strCrossForeignKey=?"), array($intId, $intFk));
+                if (!empty($strCrossForeignKey)) {
+                    $intFk = $arrData[$strCrossForeignKey];
+                    $objItem = $strModel::findBy(array("$t.$strCrossCurrentKey=? AND $t.$strCrossForeignKey=?"), array($intId, $intFk));
+                }
 
                 if ($objItem === null) {
                     $objItem = new $strModel();
                     $objItem->tstamp = time();
                     $objItem->$strCrossCurrentKey  = $intId;
-                    $objItem->$strCrossForeignKey = $intFk;
+
+                    if (!empty($strCrossForeignKey)) {
+                        $objItem->$strCrossForeignKey = $intFk;
+                    }
                 }
 
                 foreach ($arrData as $k => $v) {
